@@ -1,0 +1,91 @@
+Table career {
+  career_id bigint [primary key, increment]
+  name varchar [not null]
+  university_id bigint [not null]
+  duration int
+  degree_awarded varchar
+
+  indexes {
+    (university_id, name) [unique]
+  }
+}
+
+Table university {
+  university_id bigint [primary key, increment]
+  name varchar [not null]
+  address varchar
+  phone_number varchar
+  email varchar [not null, unique]
+}
+
+Table course {
+  course_id bigint [primary key, increment]
+  name varchar [not null]
+  career_id bigint [not null]
+
+  indexes {
+    (career_id, name) [unique]
+  }
+}
+
+Table section {
+  section_id bigint [primary key, increment]
+  course_id bigint [not null]
+  teacher_id bigint [not null]
+  classroom varchar
+  period varchar
+  schedule varchar
+}
+
+Table student {
+  student_id bigint [primary key, increment]
+  name varchar [not null]
+  birthdate date
+  phone_number varchar
+  career_id bigint [not null]
+  email varchar [not null, unique]
+  address varchar
+}
+
+Table teacher {
+  teacher_id bigint [primary key, increment]
+  name varchar [not null]
+  birthdate date
+  phone_number varchar
+  email varchar [not null, unique]
+  university_id bigint [not null]
+}
+
+Table enrollment {
+  enrollment_id bigint [primary key, increment]
+  student_id bigint [not null]
+  section_id bigint [not null]
+  enrollment_date date
+  status enrollment_status [not null]
+  final_grade int
+}
+
+
+Ref: section.section_id < enrollment.section_id
+
+Ref: student.student_id < enrollment.student_id
+
+Ref: university.university_id < teacher.university_id
+
+Ref: university.university_id < career.university_id
+
+Ref: course.course_id < section.course_id
+
+Ref: career.career_id < course.career_id
+
+Ref: career.career_id < student.career_id
+
+Ref: teacher.teacher_id < section.teacher_id
+
+
+Enum enrollment_status {
+  ENROLLED
+  PASSED
+  FAILED
+  WITHDRAWN
+}
