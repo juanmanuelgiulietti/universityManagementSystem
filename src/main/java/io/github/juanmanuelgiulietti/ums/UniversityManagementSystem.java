@@ -1,4 +1,4 @@
-package com.example.demo;
+package io.github.juanmanuelgiulietti.ums;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
