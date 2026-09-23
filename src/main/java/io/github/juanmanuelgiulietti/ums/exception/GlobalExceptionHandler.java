@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import io.github.juanmanuelgiulietti.ums.exception.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-    
+
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -73,7 +73,7 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         log.warn("Data integrity violation on {} {}", request.getMethod(), request.getRequestURI(), ex);
-        
+
         var body = new ErrorResponse(
             OffsetDateTime.now(),
             HttpStatus.CONFLICT.value(),

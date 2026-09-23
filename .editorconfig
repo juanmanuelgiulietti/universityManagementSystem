@@ -1,0 +1,27 @@
+# EditorConfig: https://editorconfig.org
+root = true
+
+# Base para todo el proyecto
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# YAML no admite tabs y su convención son 2 espacios
+[*.{yml,yaml}]
+indent_size = 2
+
+# El modelo en DBML ya está escrito con 2 espacios
+[*.dbml]
+indent_size = 2
+
+# En Markdown, dos espacios al final de línea son un salto de línea real
+[*.md]
+trim_trailing_whitespace = false
+
+# Scripts de Windows: coherente con lo que ya declara .gitattributes
+[*.cmd]
+end_of_line = crlf
