@@ -10,4 +10,4 @@ public record ErrorResponse (
     List<String> errors,
     String path
 ){}
-    
+

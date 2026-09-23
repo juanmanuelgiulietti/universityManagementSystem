@@ -27,31 +27,31 @@ public class UniversityController {
 
     @PostMapping
     public ResponseEntity<UniversityResponse> createUniversity(@Valid @RequestBody UniversityRequest request) {
-    
+
         var response = service.createUniversity(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
     public ResponseEntity<List<UniversityResponse>> getAllUniversities() {
-        
+
         var response = service.getAllUniversities();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UniversityResponse> getUniversityById( @PathVariable Long id) {
-       
+
         var response = service.getUniversityById(id);
         return ResponseEntity.ok(response);
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<UniversityResponse> updateUniversity( @PathVariable Long id, @Valid @RequestBody UniversityRequest request) {
         var response = service.updateUniversity(id, request);
         return ResponseEntity.ok(response);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUniversity( @PathVariable Long id) {
         service.deleteUniversity(id);
