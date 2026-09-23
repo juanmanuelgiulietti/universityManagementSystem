@@ -4,7 +4,7 @@ Sistema de gestión universitaria desarrollado como práctica de backend.
 
 ## ¿Con qué está hecho?
 
-- Java 21
+- Java 25
 - Spring Boot 4.1.1
 - Maven — incluido en el repositorio a través del wrapper, no requiere instalación
 - PostgreSQL 18
@@ -13,7 +13,7 @@ Sistema de gestión universitaria desarrollado como práctica de backend.
 
 ## ¿Qué necesito instalado antes de empezar?
 
-**1. JDK 21**
+**1. JDK 25**
 
 Verificar la instalación:
 
