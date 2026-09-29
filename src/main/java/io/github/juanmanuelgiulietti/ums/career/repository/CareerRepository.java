@@ -3,6 +3,7 @@ package io.github.juanmanuelgiulietti.ums.career.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import io.github.juanmanuelgiulietti.ums.career.entity.Career;
 
@@ -12,5 +13,6 @@ public interface CareerRepository extends JpaRepository<Career, Long> {
 
     boolean existsByNameAndUniversityUniversityIdAndCareerIdNot(String name, Long universityId, Long careerId);
 
-    List<Career> findByUniversityUniversityId(Long universityId);
+    @Query("SELECT c FROM Career c JOIN FETCH c.university")
+    List<Career> findAllWithUniversity();
 }
