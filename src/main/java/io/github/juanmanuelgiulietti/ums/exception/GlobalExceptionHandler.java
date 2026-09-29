@@ -23,14 +23,28 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         var body = new ErrorResponse(
-            OffsetDateTime.now(),
-            HttpStatus.NOT_FOUND.value(),
-            ex.getMessage(),
-            List.of(),
-            request.getRequestURI()
-        );
+                OffsetDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(),
+                List.of(),
+                request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(BusinessRuleException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessRule(
+            BusinessRuleException ex,
+            HttpServletRequest request) {
+
+        var body = new ErrorResponse(
+                OffsetDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                List.of(),
+                request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
 
     @ExceptionHandler(DuplicateResourceException.class)
@@ -39,12 +53,11 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         var body = new ErrorResponse(
-            OffsetDateTime.now(),
-            HttpStatus.CONFLICT.value(),
-            ex.getMessage(),
-            List.of(),
-            request.getRequestURI()
-        );
+                OffsetDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                ex.getMessage(),
+                List.of(),
+                request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
@@ -55,14 +68,13 @@ public class GlobalExceptionHandler {
             HttpServletRequest request) {
 
         var body = new ErrorResponse(
-            OffsetDateTime.now(),
-            HttpStatus.BAD_REQUEST.value(),
-            "Validation failed",
-            ex.getBindingResult().getFieldErrors().stream()
-                .map(error -> error.getField() + ": " + error.getDefaultMessage())
-                .toList(),
-            request.getRequestURI()
-        );
+                OffsetDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Validation failed",
+                ex.getBindingResult().getFieldErrors().stream()
+                        .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                        .toList(),
+                request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
     }
@@ -75,12 +87,11 @@ public class GlobalExceptionHandler {
         log.warn("Data integrity violation on {} {}", request.getMethod(), request.getRequestURI(), ex);
 
         var body = new ErrorResponse(
-            OffsetDateTime.now(),
-            HttpStatus.CONFLICT.value(),
-            "The operation conflicts with existing data",
-            List.of(),
-            request.getRequestURI()
-        );
+                OffsetDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                "The operation conflicts with existing data",
+                List.of(),
+                request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
@@ -93,12 +104,11 @@ public class GlobalExceptionHandler {
         log.error("Unexpected error on {} {}", request.getMethod(), request.getRequestURI(), ex);
 
         var body = new ErrorResponse(
-            OffsetDateTime.now(),
-            HttpStatus.INTERNAL_SERVER_ERROR.value(),
-            "An unexpected error occurred",
-            List.of(),
-            request.getRequestURI()
-        );
+                OffsetDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "An unexpected error occurred",
+                List.of(),
+                request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
     }
