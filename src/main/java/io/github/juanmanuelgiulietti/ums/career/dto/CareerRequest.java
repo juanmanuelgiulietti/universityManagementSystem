@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public record CareerRequest(
         @NotBlank(message = "Name is required") @Size(max = 255, message = "Name must be less than or equal to 255 characters") String name,
 
-        @NotNull(message = "University ID is required") Long universityId,
+        @NotNull(message = "Career ID is required") Long universityId,
 
         @Min(value = 1, message = "Duration must be greater or equal to 1") Integer duration,
 
