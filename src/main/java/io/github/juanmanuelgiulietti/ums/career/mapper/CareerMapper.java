@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import io.github.juanmanuelgiulietti.ums.career.dto.CareerRequest;
 import io.github.juanmanuelgiulietti.ums.career.dto.CareerResponse;
+import io.github.juanmanuelgiulietti.ums.career.dto.CareerSummaryResponse;
 import io.github.juanmanuelgiulietti.ums.career.entity.Career;
 import io.github.juanmanuelgiulietti.ums.university.entity.University;
 import io.github.juanmanuelgiulietti.ums.university.mapper.UniversityMapper;
@@ -31,6 +32,13 @@ public class CareerMapper {
                 universityMapper.toSummary(career.getUniversity()),
                 career.getDuration(),
                 career.getDegreeAwarded());
+    }
+
+    public CareerSummaryResponse toSummary(Career career) {
+        return new CareerSummaryResponse(
+                career.getCareerId(),
+                career.getName(),
+                universityMapper.toSummary(career.getUniversity()));
     }
 
     public void updateEntity(Career career, CareerRequest request) {
